@@ -19,6 +19,14 @@ const user_registeration = catchAsync(async (req, res, next) => {
     "type",
     "password",
   ]);
+
+  if (user_info.type !== "seller" && user_info.type !== "buyer"){
+    return res.status(400).send({
+      status: false,
+      message: "Invalid type, type should be either seller or buyer",
+      response: {},
+    });
+  }
   
   //initialize new user instance
   let user_instance = new User(user_info);

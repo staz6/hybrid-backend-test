@@ -19,9 +19,9 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 // Routes initialize
-app.use("/auth", authRoutes);
-app.use("/seller", sellerRoutes);
-app.use("/buyer", buyerRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/seller", sellerRoutes);
+app.use("/api/buyer", buyerRoutes);
 
 // Test route
 app.use("/ping", function (req, res, next) {

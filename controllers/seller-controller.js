@@ -78,7 +78,7 @@ const getOrders = catchAsync(async (req, res, next) => {
       data: orders,
     });
   } else {
-    res.status(402).send({
+    res.status(404).send({
       status: false,
       message: "Orders not found",
       data: [],

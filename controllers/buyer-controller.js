@@ -45,7 +45,7 @@ const getSellerCatalog = catchAsync(async (req, res, next) => {
       data: catalog,
     });
   } else {
-    res.status(402).send({
+    res.status(404).send({
       status: false,
       message: "Catalog not found",
       data: [],
@@ -84,7 +84,7 @@ const placeOrder = catchAsync(async (req, res, next) => {
       data: exist,
     });
   } else {
-    res.status(402).send({
+    res.status(404).send({
       status: false,
       message: "Incorrect product selected",
       data: exist,

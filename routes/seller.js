@@ -3,10 +3,10 @@ const router = express.Router();
 const authController = require('../controllers/auth-controller');
 const sellerController = require('../controllers/seller-controller');
 
-router.get(
-    "/test",
-    authController.authenticateSaler,
-    sellerController.test
+router.post(
+    "/create-catalog",
+    authController.authenticateSeller,
+    sellerController.createCatalog
   );
 
 module.exports = router;

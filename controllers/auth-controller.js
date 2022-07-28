@@ -92,7 +92,7 @@ const login = catchAsync(async (req, res, next) => {
 })
 
 
-const authenticateSaler = catchAsync(async (req, res, next) => {
+const authenticateSeller = catchAsync(async (req, res, next) => {
 
     if (!req.headers['authorization'] || req.headers['authorization'] == '') {
         return res.send({
@@ -164,7 +164,7 @@ const authenticateBuyer = catchAsync(async (req, res, next) => {
 
 module.exports={
     user_registeration,
-    authenticateSaler,
+    authenticateSeller,
     authenticateBuyer,
     login
 }

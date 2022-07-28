@@ -101,12 +101,12 @@ const authenticateSaler = catchAsync(async (req, res, next) => {
         });
       }
     
-      var decoded = jwt.decode(req.headers['x-access-token']);
-    
+      var decoded = jwt.decode(req.headers['authorization']);
+      
       if(decoded){  
 
         User.findOne({userName:decoded.userName}).then((user)=>{
-            if(!user || user.type !== "saler"){
+            if(!user || user.type !== "seller"){
                 res.status(500).send({
                     status: false,
                     message: 'Not authroize',

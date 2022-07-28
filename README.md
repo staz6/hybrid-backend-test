@@ -15,7 +15,19 @@ Steps:
 - run `npm start`
 
 ## ScreenShots:
-
+- Login
 ![Login](./assets/login.png)
+- Register
+![Register](./assets/register.png)
+- Create Catalog
+![Register](./assets/create-catalog.png)
+- Get Order
+![Register](./assets/get-orders.png)
+- Get Seller
+![Register](./assets/get-sellers.png)
+- Get Seller Catalog
+![Register](./assets/get-seller-catalog.png)
+- Place order
+![Register](./assets/create-order.png)
 
 

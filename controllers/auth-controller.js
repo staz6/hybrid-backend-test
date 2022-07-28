@@ -136,8 +136,7 @@ const authenticateBuyer = catchAsync(async (req, res, next) => {
         });
       }
     
-      var decoded = jwt.decode(req.headers['x-access-token']);
-    
+      var decoded = jwt.decode(req.headers['authorization']);
       if(decoded){  
 
         User.findOne({userName:decoded.userName}).then((user)=>{

@@ -9,6 +9,7 @@ require("dotenv").config();
 
 const authRoutes = require("./routes/auth");
 const sellerRoutes = require("./routes/seller")
+const buyerRoutes = require("./routes/buyer")
 
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,6 +19,7 @@ app.use(express.static("public"));
 
 app.use("/auth", authRoutes);
 app.use("/seller", sellerRoutes);
+app.use("/buyer",buyerRoutes)
 
 app.use("/ping", function (req, res, next) {
   res.status(200).send("pong");

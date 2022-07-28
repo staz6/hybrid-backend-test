@@ -1,13 +1,21 @@
 var express = require('express');
 const http = require("http");
 const db = require("./db/config");
+const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
+
+
+const authRoutes = require("./routes/auth");
+
 var app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static("public"));
 
 
-
+app.use("/auth", authRoutes);
 
 app.use("/ping", function (req, res, next) {
   res.status(200).send("pong");

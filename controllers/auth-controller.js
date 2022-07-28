@@ -92,7 +92,79 @@ const login = catchAsync(async (req, res, next) => {
 })
 
 
+const authenticateSaler = catchAsync(async (req, res, next) => {
+
+    if (!req.headers['authorization'] || req.headers['authorization'] == '') {
+        return res.send({
+          status: false,
+          message: 'No token in headers',
+        });
+      }
+    
+      var decoded = jwt.decode(req.headers['x-access-token']);
+    
+      if(decoded){  
+
+        User.findOne({userName:decoded.userName}).then((user)=>{
+            if(!user || user.type !== "saler"){
+                res.status(500).send({
+                    status: false,
+                    message: 'Not authroize',
+                  });
+            }else{
+                req.user=user
+                next();
+            }   
+        })
+
+      }else{
+        return res.send({
+            status: false,
+            message: 'Invalid token',
+          });
+      }
+
+})
+
+
+const authenticateBuyer = catchAsync(async (req, res, next) => {
+
+    if (!req.headers['authorization'] || req.headers['authorization'] == '') {
+        return res.send({
+          status: false,
+          message: 'No token in headers',
+        });
+      }
+    
+      var decoded = jwt.decode(req.headers['x-access-token']);
+    
+      if(decoded){  
+
+        User.findOne({userName:decoded.userName}).then((user)=>{
+            if(!user || user.type !== "buyer"){
+                res.status(500).send({
+                    status: false,
+                    message: 'Not authroize',
+                  });
+            }else{
+                req.user=user
+                next();
+            }   
+        })
+
+      }else{
+        return res.send({
+            status: false,
+            message: 'Invalid token',
+          });
+      }
+
+})
+
+
 module.exports={
     user_registeration,
+    authenticateSaler,
+    authenticateBuyer,
     login
 }

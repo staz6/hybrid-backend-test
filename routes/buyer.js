@@ -15,4 +15,10 @@ router.get(
     buyerController.getSellerCatalog
 )
 
+router.post(
+    "/create-order/:seller_id",
+    authController.authenticateBuyer,
+    buyerController.placeOrder
+)
+
 module.exports = router;

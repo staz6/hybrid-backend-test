@@ -3,7 +3,7 @@ const misc_service = require('../services/misc-service');
 const User = require('../models/user-model');
 const Product = require('../models/product-model');
 const Catalog = require('../models/catalog-model');
-
+const Order = require('../models/order-model');
 const createCatalog = catchAsync(async (req, res, next) =>{
     
     try{
@@ -38,7 +38,32 @@ const createCatalog = catchAsync(async (req, res, next) =>{
 
 })
 
+const getOrders = catchAsync(async (req,res,next)=>{
+    const sellerId=req.user._id
+    orders = await Order.find({sellerId:sellerId}).populate({
+        path: 'buyerId',
+        select: { userName:1},
+    }).populate({
+        path:"productsId"
+    })
+    console.log(orders)
+    if(orders){
+        res.status(200).send({
+            status: true,
+            message: 'Order get successfully',
+            data:orders
+          });
+    }else{
+        res.status(402).send({
+            status: false,
+            message: 'Orders not found',
+            data:[]
+          });
+    }
+
+})
+
 
 module.exports={
-    createCatalog
+    createCatalog,getOrders
 }

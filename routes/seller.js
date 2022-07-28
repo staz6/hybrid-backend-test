@@ -9,4 +9,10 @@ router.post(
     sellerController.createCatalog
   );
 
+router.get(
+  "/orders",
+  authController.authenticateSeller,
+    sellerController.getOrders
+)
+
 module.exports = router;

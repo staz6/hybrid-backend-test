@@ -1,7 +1,7 @@
 const misc_service = require('../services/misc-service');
 const User = require('../models/user-model');
 const bcrypt = require('bcryptjs');
-
+const jwt = require('jsonwebtoken');
 const catchAsync = require('../services/catchAsync.js');
 
 
@@ -55,9 +55,44 @@ const user_registeration = catchAsync(async (req, res, next) => {
       
   });
 
+const login = catchAsync(async (req, res, next) => {
+    
+      User.findOne({userName:req.body.userName})
+    .exec()
+    .then(function (user) {
+        bcrypt
+          .compare(req.body.password, user.password)
+          .then(async (match) => {
+            if (match) {
+                let payload = { userName: req.body.userName,type:user.type };
+                let token = jwt.sign(payload, process.env.SUPER_SECRET);
+                return res.json({
+                  status: true,
+                  message: 'Login Successful',
+                  response: token,
+                  type: 'LOGIN_SUCCESS',
+                });
+            }else{
+                return res.status(400).send({
+                    status: false,
+                    message: 'Incorrect password',
+                    });
+            }
+          })
+        
 
+
+    }).catch(()=>{
+        return res.status(400).send({
+            status: false,
+            message: 'Username not found',
+            });
+    })
+
+})
 
 
 module.exports={
-    user_registeration
+    user_registeration,
+    login
 }
